@@ -1,0 +1,14 @@
+[Unit]
+Description=Caldera Server
+After=network.target
+
+[Service]
+User=caldera
+Group=caldera
+WorkingDirectory=/opt/caldera
+ExecStart=/usr/bin/python3 /opt/caldera/server.py
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+

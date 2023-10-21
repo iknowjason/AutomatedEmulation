@@ -1,0 +1,20 @@
+- name: test1
+  description: test1
+  tactic: lateral-movement
+  technique_id: '7777'
+  technique_name: test1
+  executors:
+  - payloads: []
+    platform: linux
+    name: sh
+    cleanup: []
+    parsers: []
+  repeatable: false
+  additional_info: {}
+  privilege: ''
+  singleton: true
+  buckets: []
+  requirements: []
+  access: {}
+  cleanup: []
+  id: 79fd76dc-eaea-415e-8e9f-255050ac5d3f
