@@ -32,8 +32,9 @@ export AWS_SECRET_ACCESS_KEY="VALUE"
 ## Build and Destroy Resources
 
 ### Run terraform init
+Change into the AutomatedEmulation working directory and type:
+
 ```
-cd AutomatedEmulation
 terraform init
 ```
 
