@@ -120,8 +120,12 @@ API Keys
 api_key_blue: blueadmin2023
 api_key_red: redamin2023
 ```
-**Caldera on Windows Client**
-The Caldera sandcat agent is automatically installed and launches on the Windows client system.  The bootstrap script waits until Caldera is up and available, then installs Sandcat.  To troubleshoot this, look in the following logfile on the Windows system:  
+**Caldera on Windows Client:**
+
+The Caldera sandcat agent is automatically installed and launches on the Windows client system.  The bootstrap script waits until Caldera is up and available, then installs Sandcat caldera agent.  It should look like this.
+
+
+To troubleshoot this, look in the following logfile on the Windows system:  
 ```
 C:\Terraform\prelude_log.log
 ```
