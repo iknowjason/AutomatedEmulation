@@ -102,6 +102,10 @@ tail -f /var/log/user-data.log
 
 To customize Caldera, you can modify the default admin credentials for red, blue and api keys in bas.tf.  For other customizations, you can modify the local.yml.tpl Caldera configuration file.
 
+You can create custom abilities in your project that get automatically loaded into Caldera.  This image shows a custom ability for lateral-movement that is built locally from ```files/bas/abilities/lateral-movement```.
+
+![Caldera](images/caldera2.png "Abilities")
+
 **Teraform Output:**
 
 View the terraform outputs for important Caldera access information:
