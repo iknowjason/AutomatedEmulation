@@ -220,6 +220,25 @@ To modify this file locally, it is located in ```files\windows\prelude.ps1.tpl``
 
 ### VECTR
 
+VECTR by Security Risk Advisors is installed automatically.  From their Github repo:
+```
+VECTR is a tool that facilitates tracking of your red and blue team testing activities to measure detection and prevention capabilities across different attack scenarios
+```
+
+![VECTR](images/vectr.png "VECTR")
+
+Take a look at the terraform output to see the public URL and credentials for accessing VECTR:
+```
+VECTR Console
+-------------
+https://ec2-3-15-204-148.us-east-2.compute.amazonaws.com:8081
+
+VECTR Credentials
+-----------------
+admin:11_ThisIsTheFirstPassword_11
+```
+
+
 ### Red Tools
 
 ### Blue Tools
