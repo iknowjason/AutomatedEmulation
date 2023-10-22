@@ -1,27 +1,34 @@
-# Operator Lab 
+# Automated Emulation Lab
 
-Operator Lab is a security lab enabling Red and Blue teams to improve offensive and defensive capabilities.  This documentation is a work in progress and will be updated further.
+Automated Emulation Lab is a terraform template creating a customizable Breach and Attack Simulation lab.  It automically builds the following resources in AWS:
 
-## Overview
+* One Linux server deploying Caldera, Prelude Operator Headless, VECTR services
+* One Windows Client (Windows Server 2022 DC) auto-configured for Caldera agent deployment, Prelude pneuma, and other Red/Blue tools
 
 ## Features and Capabilities
 
-## Installation
+## Setup and Requirements
+
+Clone this repository:
+
 
 Tested with:
 * Mac OS 13.4
-* python 3.9
 * terraform 1.5.7
 
-Extra requirements:
-Faker:  ```pip3 install faker```
 
 Credentials Setup:
 Generate an IAM programmatic access key that has permissions to build resources in your AWS account.  Setup your .env to load these environment variables.  You can also use the direnv tool to hook into your shell and populate the .envrc.  Should look something like this in your .env or .envrc:
+
 ```
 export AWS_ACCESS_KEY_ID="VALUE"
 export AWS_SECRET_ACCESS_KEY="VALUE"
 ```
+
+## Build and Destroy Resources
+
+Clone
+
 
 ## Usage Examples
 
