@@ -21,6 +21,7 @@ Tested with:
 
 
 Credentials Setup:
+
 Generate an IAM programmatic access key that has permissions to build resources in your AWS account.  Setup your .env to load these environment variables.  You can also use the direnv tool to hook into your shell and populate the .envrc.  Should look something like this in your .env or .envrc:
 
 ```
