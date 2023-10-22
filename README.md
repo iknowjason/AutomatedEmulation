@@ -16,7 +16,6 @@ Tested with:
 Clone this repository:
 ```
 git clone https://github.com/iknowjason/AutomatedEmulation
-cd AutomatedEmulation
 ```
 
 Credentials Setup:
