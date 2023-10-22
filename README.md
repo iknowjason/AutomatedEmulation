@@ -86,9 +86,14 @@ Caldera is built on an Ubuntu Linux 22.04 AMI automatically.  The following loca
 
 **Troubleshooting Caldera:**
 
-SSH into the Caldera server by looking in ```terraform output``` for this line:  ```ssh -i ssh_key.pem ubuntu@3.15.204.148```
+SSH into the Caldera server by looking in ```terraform output``` for this line:  
+```
+ssh -i ssh_key.pem ubuntu@3.15.204.148
+```
 Once in the system, tail the user-data logfile.  You will see the steps from the ```bootstrap.sh.tpl``` script running:
-```tail -f /var/log/user-data.log```
+```
+tail -f /var/log/user-data.log
+```
 
 ### Prelude
 
