@@ -201,7 +201,11 @@ Email: 1b0743d7-6d2a-4963-abc4-388474423b78@desktop.prelude.org
 ```
 **Operator on Windows Client:**
 
-The Caldera sandcat agent is automatically installed and launches on the Windows client system.  The bootstrap script waits until Caldera is up and available, then installs Sandcat caldera agent.  It should look like this.
+The pneuma agent is automatically installed and launches on the Windows client system.  The bootstrap script waits until the headless operator is up and available, then installs the pneuma agent.  The prelude desktop UI agent on Windows is also installed.  This installer local file is:
+
+```
+files/bas/prelude-operator-1.7.1-x64.exe
+```
 
 To troubleshoot this, look in the following logfile on the Windows system:  
 ```
