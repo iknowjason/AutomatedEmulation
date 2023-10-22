@@ -95,6 +95,26 @@ Once in the system, tail the user-data logfile.  You will see the steps from the
 tail -f /var/log/user-data.log
 ```
 
+To customize Caldera, you can modify the default admin credentials for red, blue and api keys in bas.tf.  For other customizations, you can modify the local.yml.tpl Caldera configuration file.
+
+View the terraform outputs for important Caldera access information:
+```
+Caldera Console
+-------
+http://3.15.204.148:9999
+
+Caldera Console Credentials
+-------------------
+blue:Caldera2023
+red:Caldera2023
+admin:Caldera2023
+
+API Keys
+--------
+api_key_blue: blueadmin2023
+api_key_red: redamin2023
+```
+
 ### Prelude
 
 ### VECTR
