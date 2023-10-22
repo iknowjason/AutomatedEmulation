@@ -145,6 +145,38 @@ Prelude Operator Headless is built on an Ubuntu Linux 22.04 AMI automatically.  
 * files/bas/bootstrap.sh.tpl:  The boostrap script for Prelude headless and other services.
 * files/bas/operator.service.tpl:  The operator service file that is automatically installed
 
+**Prelude Desktop UI Setup through manual cloud redirector:**
+
+Mandatory Configuration Changes:
+Each Prelude instance has a unique email address and the terraform variable needs to be changed.  In ```bas.tf```, change the following variable to match your environment:
+```
+variable "operator_email" {
+  description = "The email address for Prelude Operator Desktop UI client"
+  default     = "1b0743d7-6d2a-4963-abc4-388474423b78@desktop.prelude.org"
+}
+```
+
+The Prelude headless services and configuration are automatically deployed.  A Pneuma agent is served on a port that the Windows client automatically launches and registers the agent.  To setup Prelude Desktop UI, you need to configure the cloud redirector:
+
+1. Go to ```Connect``` in top left corner
+2. Go to ```Deploy Redirectors``` on the right
+3. Under ```Manual Headless Operator```, fill in the IP and token
+4. The IP and token is taken from the ```terraform output``` and should look like this:
+```
+Operator Headless Prelude Desktop UI
+-----------------
+IP: 3.15.204.148
+Token: c78cf931-cc89-8e00-94a7-f1c236996aa6
+Email: 1b0743d7-6d2a-4963-abc4-388474423b78@desktop.prelude.org
+```
+5. Hit ```provision``` after filling in IP and token
+6. Look for the redirector IP on the right side and click on it
+7. Hit ```Connect``` at the bottom
+
+You should now see the pneuma agent connected from your Windows client system through the cloud redirector:
+![Caldera](images/prelude1.png "Prelude View")
+
+
 **Troubleshooting Prelude:**
 
 SSH into the Caldera server by looking in ```terraform output``` for this line:  
