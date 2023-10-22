@@ -37,7 +37,4 @@ terraform.rc
 .envrc
 .env.*.sh
 
-# ignore the terraform files created
-*.tf
-
 .

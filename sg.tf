@@ -4,8 +4,8 @@ data "http" "firewall_allowed" {
 }
 
 locals {
-  #src_ip = "${chomp(data.http.firewall_allowed.response_body)}/32"
-  src_ip = "0.0.0.0/0" 
+  src_ip = "${chomp(data.http.firewall_allowed.response_body)}/32"
+  #src_ip = "0.0.0.0/0" 
 }
 
 resource "aws_security_group" "operator_velocihelk" {
