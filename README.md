@@ -103,6 +103,7 @@ tail -f /var/log/user-data.log
 To customize Caldera, you can modify the default admin credentials for red, blue and api keys in bas.tf.  For other customizations, you can modify the local.yml.tpl Caldera configuration file.
 
 **Teraform Output:**
+
 View the terraform outputs for important Caldera access information:
 ```
 Caldera Console
@@ -156,6 +157,7 @@ tail -f /var/log/user-data.log
 ```
 
 **Teraform Output:**
+
 View the terraform outputs for important Operator access information:
 ```
 Operator Headless Prelude Desktop UI
@@ -167,9 +169,6 @@ Email: 1b0743d7-6d2a-4963-abc4-388474423b78@desktop.prelude.org
 **Operator on Windows Client:**
 
 The Caldera sandcat agent is automatically installed and launches on the Windows client system.  The bootstrap script waits until Caldera is up and available, then installs Sandcat caldera agent.  It should look like this.
-
-![Caldera](images/caldera1.png "Agent View")
-
 
 To troubleshoot this, look in the following logfile on the Windows system:  
 ```
