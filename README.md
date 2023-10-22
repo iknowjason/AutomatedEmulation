@@ -123,6 +123,7 @@ api_key_red: redamin2023
 **Caldera on Windows Client:**
 
 The Caldera sandcat agent is automatically installed and launches on the Windows client system.  The bootstrap script waits until Caldera is up and available, then installs Sandcat caldera agent.  It should look like this.
+![Calera](images/caldera1.jpeg "Agent View")
 
 
 To troubleshoot this, look in the following logfile on the Windows system:  
