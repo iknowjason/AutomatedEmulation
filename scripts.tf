@@ -8,8 +8,7 @@ locals {
         s3_bucket = "${aws_s3_bucket.staging.id}"
       }
     },
-    
-        {
+    {
       name = "${path.module}/files/windows/sysmon.ps1.tpl"
       variables = {
         s3_bucket     = "${aws_s3_bucket.staging.id}"
@@ -20,8 +19,6 @@ locals {
         domain_join   = false 
       }
     },
-    
-    
     {
       name = "${path.module}/files/windows/prelude.ps1.tpl"
       variables = {
