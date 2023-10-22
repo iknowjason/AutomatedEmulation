@@ -98,7 +98,7 @@ Once in the system, tail the user-data logfile.  You will see the steps from the
 tail -f /var/log/user-data.log
 ```
 
-**Customize**:
+**Customiz Caldera Linux:**
 
 To customize Caldera, you can modify the default admin credentials for red, blue and api keys in bas.tf.  For other customizations, you can modify the local.yml.tpl Caldera configuration file.
 
