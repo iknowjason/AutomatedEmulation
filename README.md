@@ -237,8 +237,16 @@ VECTR Credentials
 admin:11_ThisIsTheFirstPassword_11
 ```
 
-
 ### Red Tools
+
+On the Windows Client system, the following tools are automatically deployed into ```C:\Tools```:
+
+* Atomic Red Team (ART)
+* PurpleSharp
+
+The local bootstrap script for customization is ```files\windows\red.ps1.tpl```
+
+To track monitoring of the deployment on the Windows Client, see the logfile at ```C:\Terraform\red_log.log```
 
 ### Blue Tools
 
