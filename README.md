@@ -157,7 +157,7 @@ variable "operator_email" {
 }
 ```
 
-The Prelude headless services and configuration are automatically deployed.  A Pneuma agent is served on a port that the Windows client automatically launches and registers the agent.  To setup Prelude Desktop UI, you need to configure the cloud redirector:
+The Prelude headless services and configuration are automatically deployed.  A Pneuma agent is served on a port that the Windows client uses to automatically download and install this agent.  To setup Prelude Desktop UI, you need to configure the cloud redirector:
 
 1. Go to ```Connect``` in top left corner
 2. Go to ```Deploy Redirectors``` on the right
