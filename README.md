@@ -82,7 +82,7 @@ Caldera is built on an Ubuntu Linux 22.04 AMI automatically.  The following loca
 * files/bas/local.yml.tpl:  The Caldera configuration file
 * files/bas/caldera.service:  Installs the caldera service
 * files/bas/abilities/:  A local directory with custom abilities that will automatically deploy to the caldera server in ```/opt/caldera/data/abilities```
-* * files/bas/payloads/:  A local directory with custom payloads that will automatically deploy to the caldera server in ```/opt/caldera/data/payloads```
+* files/bas/payloads/:  A local directory with custom payloads that will automatically deploy to the caldera server in ```/opt/caldera/data/payloads```
 
 ### Prelude
 
