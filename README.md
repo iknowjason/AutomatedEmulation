@@ -11,7 +11,7 @@ See the **Features and Capabilities** section for more details.
 
 ## Key Differences
 
-This lab differs from other popular "Cyber Ranges."  
+This lab differs from other popular ```Cyber Ranges```.  No secondary tools like Ansible are necessary.  Instead of using 3rd party configuration management tools, this lab uses terraform providers (AWS API) and builtin AWS features (```user data```).  This increases stability, consistency, and speed for building and configuring cloud resources.  Use terraform, bash, and powershell to configure.  A small user-data script is pushed into the system and runs and individual configuration management scripts are uploaded to an S3 bucket.  The master script instructs the system which smaller scripts to run which builds the system.  With good documentation, the location of these scripts should make it easy to add and customize.  See the **Features and Capabilities** section for more details.     
 
 ## Requirements and Setup
 
