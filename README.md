@@ -75,6 +75,9 @@ locals {
 ```
 
 ### Caldera
+
+**Caldera Linux Server**
+
 Caldera is built on an Ubuntu Linux 22.04 AMI automatically.  The following local project files are important for customization:
 
 * bas.tf:  The terraform file that builds the Linux server and all terraform variables for Caldera.
@@ -95,8 +98,11 @@ Once in the system, tail the user-data logfile.  You will see the steps from the
 tail -f /var/log/user-data.log
 ```
 
+**Customize**:
+
 To customize Caldera, you can modify the default admin credentials for red, blue and api keys in bas.tf.  For other customizations, you can modify the local.yml.tpl Caldera configuration file.
 
+**Teraform Output:**
 View the terraform outputs for important Caldera access information:
 ```
 Caldera Console
@@ -114,6 +120,13 @@ API Keys
 api_key_blue: blueadmin2023
 api_key_red: redamin2023
 ```
+**Caldera on Windows Client**
+The Caldera sandcat agent is automatically installed and launches on the Windows client system.  The bootstrap script waits until Caldera is up and available, then installs Sandcat.  To troubleshoot this, look in the following logfile on the Windows system:  
+```
+C:\Terraform\prelude_log.log
+```
+
+To modify this file locally, it is located in ```files\windows\prelude.ps1.tpl```
 
 ### Prelude
 
