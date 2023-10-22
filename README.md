@@ -250,4 +250,11 @@ To track monitoring of the deployment on the Windows Client, see the logfile at 
 
 ### Blue Tools
 
+Sysmon service and customized configuration (SwiftOnSecurity) is deployed onto the Windows Client system.  To update the sysmon version and configuration, make changes inside the ```files\sysmon``` directory.
+
+The local bootstrap script for customization is ```files\windows\sysmon.ps1.tpl```
+
+To track monitoring of the deployment on the Windows Client, see the logfile at ```C:\Terraform\blue_log.log```
+
+
 ### 
