@@ -65,3 +65,16 @@ terraform output
 
 ## Features and Capabilities
 
+### Important Firewall and White Listing
+
+### Caldera
+
+### Prelude
+
+### VECTR
+
+### Red Tools
+
+### Blue Tools
+
+### 
