@@ -221,9 +221,8 @@ To modify this file locally, it is located in ```files\windows\prelude.ps1.tpl``
 ### VECTR
 
 VECTR by Security Risk Advisors is installed automatically.  From their Github repo:
-```
-VECTR is a tool that facilitates tracking of your red and blue team testing activities to measure detection and prevention capabilities across different attack scenarios
-```
+
+_VECTR is a tool that facilitates tracking of your red and blue team testing activities to measure detection and prevention capabilities across different attack scenarios_
 
 ![VECTR](images/vectr.png "VECTR")
 
