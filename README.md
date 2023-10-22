@@ -9,7 +9,8 @@ Automated Emulation Lab is a simple terraform template creating a customizable B
 
 See the **Features and Capabilities** section for more details.
 
-** Key Differences
+## Key Differences
+
 This lab differs from other popular "Cyber Ranges."  
 
 ## Requirements and Setup
