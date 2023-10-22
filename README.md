@@ -42,9 +42,14 @@ Change into the AutomatedEmulation working directory and type:
 terraform init
 ```
 
-### Run terraform apply
+### Run terraform plan or apply
 ```
 terraform apply -auto-approve
+```
+or
+```
+terraform plan -out=run.plan
+terraform apply run.plan
 ```
 
 ### Destroy resources
