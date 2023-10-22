@@ -7,18 +7,17 @@ Automated Emulation Lab is a simple terraform template creating a customizable B
 
 ## Features and Capabilities
 
-## Setup and Requirements
+## Requirements and Setup
+
+Tested with:
+* Mac OS 13.4
+* terraform 1.5.7
 
 Clone this repository:
 ```
 git clone https://github.com/iknowjason/AutomatedEmulation
 cd AutomatedEmulation
 ```
-
-Tested with:
-* Mac OS 13.4
-* terraform 1.5.7
-
 
 Credentials Setup:
 
