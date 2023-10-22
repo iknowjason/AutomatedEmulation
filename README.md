@@ -136,6 +136,48 @@ To modify this file locally, it is located in ```files\windows\prelude.ps1.tpl``
 
 ### Prelude
 
+**Prelude Headless Linux Server**
+
+Prelude Operator Headless is built on an Ubuntu Linux 22.04 AMI automatically.  The following local project files are important for customization:
+
+* bas.tf:  The terraform file that builds the Linux server and all terraform variables for Operator.
+* files/bas/bootstrap.sh.tpl:  The boostrap script for Prelude headless and other services.
+* files/bas/operator.service.tpl:  The operator service file that is automatically installed
+
+**Troubleshooting Prelude:**
+
+SSH into the Caldera server by looking in ```terraform output``` for this line:  
+```
+ssh -i ssh_key.pem ubuntu@3.15.204.148
+```
+Once in the system, tail the user-data logfile.  You will see the steps from the ```bootstrap.sh.tpl``` script running:
+```
+tail -f /var/log/user-data.log
+```
+
+**Teraform Output:**
+View the terraform outputs for important Operator access information:
+```
+Operator Headless Prelude Desktop UI
+-----------------
+IP: 3.15.204.148
+Token: c78cf931-cc89-8e00-94a7-f1c236996aa6
+Email: 1b0743d7-6d2a-4963-abc4-388474423b78@desktop.prelude.org
+```
+**Operator on Windows Client:**
+
+The Caldera sandcat agent is automatically installed and launches on the Windows client system.  The bootstrap script waits until Caldera is up and available, then installs Sandcat caldera agent.  It should look like this.
+
+![Caldera](images/caldera1.png "Agent View")
+
+
+To troubleshoot this, look in the following logfile on the Windows system:  
+```
+C:\Terraform\prelude_log.log
+```
+
+To modify this file locally, it is located in ```files\windows\prelude.ps1.tpl```
+
 ### VECTR
 
 ### Red Tools
