@@ -1,11 +1,16 @@
 # Automated Emulation Lab
 
+## Overview
+
 Automated Emulation Lab is a simple terraform template creating a customizable Breach and Attack Simulation lab.  It automically builds the following resources hosted in AWS:
 
 * One Linux server deploying Caldera, Prelude Operator Headless, VECTR services
 * One Windows Client (Windows Server 2022 DC) auto-configured for Caldera agent deployment, Prelude pneuma, and other Red/Blue tools
 
-## Features and Capabilities
+See the **Features and Capabilities** section for more details.
+
+** Key Differences
+This lab differs from other popular "Cyber Ranges."  
 
 ## Requirements and Setup
 
@@ -51,4 +56,6 @@ The lab has been created with important terraform outputs showing services, endp
 ```
 terraform output
 ```
+
+## Features and Capabilities
 
