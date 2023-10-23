@@ -154,7 +154,7 @@ Prelude Operator Headless is built on an Ubuntu Linux 22.04 AMI automatically.  
 
 **Mandatory Configuration Changes:**
 
-Each Prelude instance has a unique email address and the terraform variable needs to be changed.  In ```bas.tf```, change the following variable to match your environment:
+Each Prelude instance has a unique email address and the terraform variable needs to be changed.  In ```bas.tf```, change the following variable to match the email address used within the instance of your Prelude Desktop UI client:
 ```
 variable "operator_email" {
   description = "The email address for Prelude Operator Desktop UI client"
