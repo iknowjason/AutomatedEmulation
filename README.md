@@ -4,8 +4,8 @@
 
 Automated Emulation is a simple terraform template creating a customizable and automated Breach and Attack Simulation lab.  It automically builds the following resources hosted in AWS:
 
-* One Linux server deploying Caldera, Prelude Operator Headless, VECTR services
-* One Windows Client (Windows Server 2022 DC) auto-configured for Caldera agent deployment, Prelude pneuma, and other Red/Blue tools
+* One Linux server deploying Caldera, Prelude Operator Headless, and VECTR
+* One Windows Client (Windows Server 2022) auto-configured for Caldera agent deployment, Prelude pneuma, and other Red & Blue tools
 
 See the **Features and Capabilities** section for more details.
 
