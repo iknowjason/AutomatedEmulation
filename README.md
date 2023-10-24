@@ -20,7 +20,7 @@ This lab differs from other popular ```Cyber Ranges``` in its design and philoso
 * Mac OS 13.4
 * terraform 1.5.7
 
-Clone this repository:
+**Clone this repository:**
 ```
 git clone https://github.com/iknowjason/AutomatedEmulation
 ```
