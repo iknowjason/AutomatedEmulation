@@ -267,7 +267,7 @@ C:\Terraform\bootstrap_log.log
 
 **Customizing Build Scripts**
 
-For adding new scripts for a customized deployment, reference the arrays in ```scripts.tf``` and ```s3.tf```.  For more exomplex deployments, the Windows system is built to have flexibility for adding customized scripts for post-deployment configuration.  This gets around the size limit of user-data not exceeding 16KB in size.  How this is done:  A small master script is always deployed via user-data.  This script has instructions to download additional scripts.  This is under your control and is configured in ```scripts.tf``` and ```s3.tf```.  In ```scripts.tf`
+For adding new scripts for a customized deployment, reference the arrays in ```scripts.tf``` and ```s3.tf```.  For more complex deployments, the Windows system is built to have flexibility for adding customized scripts for post-deployment configuration.  This gets around the size limit of user-data not exceeding 16KB in size.  How this is done:  A small master script is always deployed via user-data.  This script has instructions to download additional scripts.  This is under your control and is configured in ```scripts.tf``` and ```s3.tf```.  In ```scripts.tf```, take a look at the array called ```templatefiles```.  Add any custom terraform templatefiles here.  The file should end in 'tpl'.  This template file is generated as output into the output directory.  Then in ```s3.tf```, this little script is uploaded.  The master bootstrap script has a reference to this array.  It will automatically download all generated scripts from the ```templatefiles``` array and execute each script.
 
 **Terraform Outputs**
 
