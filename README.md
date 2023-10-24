@@ -267,7 +267,7 @@ C:\Terraform\bootstrap_log.log
 
 **Customizing Build Scripts**
 
-For adding new scripts for a customized deployment, reference the arrays in ```scripts.tf``` and ```s3.tf```.
+For adding new scripts for a customized deployment, reference the arrays in ```scripts.tf``` and ```s3.tf```.  For more exomplex deployments, the Windows system is built to have flexibility for adding customized scripts for post-deployment configuration.  This gets around the size limit of user-data not exceeding 16KB in size.  How this is done:  A small master script is always deployed via user-data.  This script has instructions to download additional scripts.  This is under your control and is configured in ```scripts.tf``` and ```s3.tf```.  In ```scripts.tf`
 
 **Terraform Outputs**
 
