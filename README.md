@@ -240,7 +240,7 @@ admin:11_ThisIsTheFirstPassword_11
 
 ### Red Tools
 
-On the Windows Client system, the following tools are automatically deployed into ```C:\Tools```:
+On the Windows Client system, the following tools are automatically deployed into ```C:\Tools\```:
 
 * Atomic Red Team (ART)
 * PurpleSharp
