@@ -265,7 +265,11 @@ The Windows Client system is built from ```win1.tf```.  Windows Server 2022 Data
 C:\Terraform\bootstrap_log.log
 ```
 
+**Customizing Build Scripts**
+
 For adding new scripts for a customized deployment, reference the arrays in ```scripts.tf``` and ```s3.tf```.
+
+**Terraform Outputs**
 
 See the output from ```terraform output``` to get the IP address and credentials for RDP:
 ```
