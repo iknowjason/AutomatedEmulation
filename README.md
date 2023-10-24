@@ -1,4 +1,4 @@
-# Automated Emulation Lab
+# Automated Emulation
 
 ## Overview
 
