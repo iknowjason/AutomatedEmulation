@@ -67,7 +67,7 @@ terraform output
 ## Features and Capabilities
 
 ### Important Firewall and White Listing
-By default when you run terraform apply, your public IPv4 address is determined via a query to ifconfig.me and the ```terraform.tfstate``` is updated automatically.  If your location changes, simply run ```terraform apply``` to update the security groups with your new public IPv4 address.  If ifconfig.me returns a public IPv6 address,  your terraform will break.  In that case you'll have to customize the white list.  To change the white list for custom rules, update this variable in ```sg.tf```:
+By default when you run terraform apply, your public IPv4 address is determined via a query to ifconfig.so and the ```terraform.tfstate``` is updated automatically.  If your location changes, simply run ```terraform apply``` to update the security groups with your new public IPv4 address.  If ifconfig.me returns a public IPv6 address,  your terraform will break.  In that case you'll have to customize the white list.  To change the white list for custom rules, update this variable in ```sg.tf```:
 ```
 locals {
   src_ip = "${chomp(data.http.firewall_allowed.response_body)}/32"
