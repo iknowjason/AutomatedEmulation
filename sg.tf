@@ -1,6 +1,6 @@
 # Thanks to @christophetd and his Github.com/Adaz project for this little code
 data "http" "firewall_allowed" {
-  url = "http://ifconfig.me"
+  url = "http://ifconfig.so"
 }
 
 locals {

@@ -94,5 +94,7 @@ if (Test-Path -Path "C:\Tools\atomic-red-team-master.zip") {
 lwrite("Installing Module invoke-atomicredteam")
 Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force
 Install-Module -Name invoke-atomicredteam,powershell-yaml -Scope AllUsers -Force
+IEX (IWR 'https://raw.githubusercontent.com/redcanaryco/invoke-atomicredteam/master/install-atomicredteam.ps1' -UseBasicParsing);
+Install-AtomicRedTeam -getAtomics
 
 lwrite("End of red.ps1")
