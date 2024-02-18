@@ -6,6 +6,8 @@ Automated Emulation is a simple terraform template creating a customizable and a
 
 * One Linux server deploying Caldera and VECTR (vectr.io)
 * One Windows Client (Windows Server 2022) auto-configured for Caldera agent deployment, and other Red & Blue tools
+* Atomic Red Team (ART) automated deploy on Windows
+* Sysmon automated deploy on Windows
 
 See the **Features and Capabilities** section for more details.
 
