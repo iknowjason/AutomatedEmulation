@@ -5,9 +5,10 @@
 Automated Emulation is a simple terraform template creating a customizable and automated Breach and Attack Simulation lab.  It automically builds the following resources hosted in AWS:
 
 * One Linux server deploying Caldera and VECTR (vectr.io)
+* Linux Server:  The latest Caldera 5.0 with Magma VueJS web application
 * One Windows Client (Windows Server 2022) auto-configured for Caldera agent deployment, and other Red & Blue tools
-* Atomic Red Team (ART) automated deploy on Windows
-* Sysmon automated deploy on Windows
+* Windows Client:  Atomic Red Team (ART) automated deployment
+* Windows Client:  Sysmon automated deployment
 
 See the **Features and Capabilities** section for more details.
 
@@ -81,7 +82,7 @@ locals {
 
 **Caldera Linux Server**
 
-Caldera is built on an Ubuntu Linux 22.04 AMI automatically with SSL support for administration.  The following local project files are important for customization:
+Caldera is built on an Ubuntu Linux 22.04 AMI automatically with SSL support for admin console.  The following local project files are important for customization:
 
 * bas.tf:  The terraform file that builds the Linux server and all terraform variables for Caldera.
 * files/bas/bootstrap.sh.tpl:  The boostrap script for Caldera and other services.
