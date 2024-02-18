@@ -81,7 +81,7 @@ locals {
 
 **Caldera Linux Server**
 
-Caldera is built on an Ubuntu Linux 22.04 AMI automatically.  The following local project files are important for customization:
+Caldera is built on an Ubuntu Linux 22.04 AMI automatically with SSL support for administration.  The following local project files are important for customization:
 
 * bas.tf:  The terraform file that builds the Linux server and all terraform variables for Caldera.
 * files/bas/bootstrap.sh.tpl:  The boostrap script for Caldera and other services.
