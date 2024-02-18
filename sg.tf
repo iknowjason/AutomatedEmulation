@@ -4,13 +4,13 @@ data "http" "firewall_allowed" {
 }
 
 locals {
-  src_ip = "${chomp(data.http.firewall_allowed.response_body)}/32"
-  #src_ip = "0.0.0.0/0" 
+  #src_ip = "${chomp(data.http.firewall_allowed.response_body)}/32"
+  src_ip = "0.0.0.0/0" 
 }
 
-resource "aws_security_group" "operator_velocihelk" {
-  name        = "operator_helk_security_group"
-  description = "Allow Velociraptor and HELK traffic"
+resource "aws_security_group" "operator" {
+  name        = "operator_bas_security_group"
+  description = "Allow traffic to BAS"
   vpc_id      = aws_vpc.operator.id 
   ingress {
     from_port   = -1 
@@ -48,7 +48,6 @@ resource "aws_security_group" "operator_velocihelk" {
     protocol    = "tcp"
     cidr_blocks = [local.src_ip, var.vpc_cidr] 
   }
-
   ingress {
     from_port   = 2181 
     to_port     = 2181 
@@ -56,10 +55,16 @@ resource "aws_security_group" "operator_velocihelk" {
     cidr_blocks = [local.src_ip, var.vpc_cidr] 
   }
   ingress {
-    from_port   = 8889 
-    to_port     = 8889 
+    from_port   = 8888 
+    to_port     = 8888 
     protocol    = "tcp"
     cidr_blocks = [local.src_ip, var.vpc_cidr] 
+  }
+  ingress {
+    from_port   = 8443
+    to_port     = 8443
+    protocol    = "tcp"
+    cidr_blocks = [local.src_ip, var.vpc_cidr]
   }
   ingress {
     from_port   = 8000 
@@ -74,7 +79,7 @@ resource "aws_security_group" "operator_velocihelk" {
     cidr_blocks = ["0.0.0.0/0"]
   }
   tags = {
-    Name = "operator_velocielk_security_group"
+    Name = "operator_bas_security_group"
   }
 }
 

@@ -6,9 +6,8 @@ After=network.target
 User=caldera
 Group=caldera
 WorkingDirectory=/opt/caldera
-ExecStart=/usr/bin/python3 /opt/caldera/server.py
+ExecStart=/usr/bin/python3 /opt/caldera/server.py --build
 Restart=always
 
 [Install]
 WantedBy=multi-user.target
-

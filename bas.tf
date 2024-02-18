@@ -6,24 +6,24 @@ variable "vectr_port" {
   default     = "8081"
 }
 
-variable "operator_email" {
-  description = "The email address for Prelude Operator Desktop UI client"
-  default     = "1b0743d7-6d2a-4963-abc4-388474423b78@desktop.prelude.org"
-}
-
 variable "caldera_port" {
   description = "Default listening port http for Caldera"
-  default     = "9999"
+  default     = "8888"
+}
+
+variable "caldera_port_https" {
+  description = "Default listening port https for Caldera"
+  default     = "8443"
 }
 
 variable "api_key_blue" {
   description = "Caldera api blue key"
-  default     = "blueadmin2023"
+  default     = "blueadmin2024"
 }
 
 variable "api_key_red" {
   description = "Caldera api red key"
-  default     = "redamin2023"
+  default     = "redadmin2024"
 }
 
 variable "blue_username" {
@@ -33,7 +33,7 @@ variable "blue_username" {
 
 variable "blue_password" {
   description = "Caldera blue password"
-  default     = "Caldera2023"
+  default     = "Caldera2024"
 }
 
 variable "red_username" {
@@ -43,7 +43,7 @@ variable "red_username" {
 
 variable "red_password" {
   description = "Caldera red password"
-  default     = "Caldera2023"
+  default     = "Caldera2024"
 }
 
 variable "caldera_admin_username" {
@@ -53,17 +53,7 @@ variable "caldera_admin_username" {
 
 variable "caldera_admin_password" {
   description = "Caldera admin password"
-  default     = "Caldera2023"
-}
-
-# the uuidgen token for operator client
-resource "random_uuid" "token" {
-
-}
-
-variable "prelude_filename" {
-  description = "The Prelude Operator windows client filename"
-  default     = "prelude-operator-1.7.1-x64.exe"
+  default     = "Caldera2024"
 }
 
 output "public_dns" {
@@ -102,26 +92,18 @@ resource "aws_security_group" "bas_ingress" {
     cidr_blocks     = [local.src_ip]
   }
 
+  # Server port Caldera https console
+  ingress {
+    from_port       = var.caldera_port_https 
+    to_port         = var.caldera_port_https 
+    protocol        = "tcp"
+    cidr_blocks     = [local.src_ip]
+  }
+
   # Server port 8081 VECTR https console
   ingress {
     from_port       = var.vectr_port 
     to_port         = var.vectr_port 
-    protocol        = "tcp"
-    cidr_blocks     = [local.src_ip]
-  }
-
-  # Server port 50051 prelude operator headless api 
-  ingress {
-    from_port       = "50051" 
-    to_port         = "50051" 
-    protocol        = "tcp"
-    cidr_blocks     = [local.src_ip]
-  }
-
-  # Server port 8888 prelude operator headless http 
-  ingress {
-    from_port       = "8888"
-    to_port         = "8888"
     protocol        = "tcp"
     cidr_blocks     = [local.src_ip]
   }
@@ -251,10 +233,20 @@ resource "aws_instance" "bas_server" {
 
 output "BAS_server_details" {
   value = <<CONFIGURATION
+
+-------------
+VECTR Console
+-------------
+https://${aws_instance.bas_server.public_dns}:${var.vectr_port}
+
+VECTR Credentials
+-----------------
+admin:11_ThisIsTheFirstPassword_11
+
 -------
 Caldera Console
 -------
-http://${aws_instance.bas_server.public_ip}:${var.caldera_port}
+https://${aws_instance.bas_server.public_dns}:${var.caldera_port_https}
 
 Caldera Console Credentials
 -------------------
@@ -267,23 +259,24 @@ API Keys
 api_key_blue: ${var.api_key_blue}
 api_key_red: ${var.api_key_red}
 
+Caldera API Cheat Sheet 
+-----------------------
+Get Agents:
+curl -k https://${aws_instance.bas_server.public_dns}:${var.caldera_port_https}/api/v2/agents \
+  -H 'accept: application/json' -H "KEY:${var.api_key_red}"
+--------------
+Get Agent's paw (PAW_ID value):
+PAW_ID=`curl -k https://${aws_instance.bas_server.public_dns}:${var.caldera_port_https}/api/v2/agents \
+  -H 'accept: application/json' -H "KEY:${var.api_key_red}" | jq -r '.[].paw'`
+--------------
+Access (run an ability against agent based on PAW_ID):
+curl -k https://${aws_instance.bas_server.public_dns}:${var.caldera_port_https}/plugin/access/exploit \
+  -H 'accept: application/json' -H "KEY:${var.api_key_red}" -H POST \
+  -d "{\"paw\":\"$PAW_ID\",\"ability_id\":\"c7ec57cd-933e-42b6-99a4-e852a9e57a33\",\"obfuscator\":\"plain-text\"}"
+
 SSH
 ---
 ssh -i ssh_key.pem ubuntu@${aws_instance.bas_server.public_ip}  
-
-VECTR Console
--------------
-https://${aws_instance.bas_server.public_dns}:${var.vectr_port}
-
-VECTR Credentials
------------------
-admin:11_ThisIsTheFirstPassword_11
-
-Operator Headless Prelude Desktop UI
------------------
-IP: ${aws_instance.bas_server.public_ip} 
-Token: ${random_uuid.token.result}
-Email: ${var.operator_email}  
 
 CONFIGURATION
 }
@@ -293,15 +286,6 @@ resource "aws_s3_object" "caldera_service_config" {
   key    = "caldera.service"
   source = "${path.module}/files/bas/caldera.service"
   content_type = "text/plain"
-}
-
-resource "aws_s3_object" "operator_service_config" {
-  bucket = aws_s3_bucket.staging.id
-  key    = "operator.service"
-  source = "${path.module}/output/bas/operator.service"
-  content_type = "text/plain"
-
-  depends_on = [local_file.operator_service]
 }
 
 resource "aws_s3_object" "caldera_default_yml" {
@@ -332,20 +316,6 @@ resource "local_file" "vectr_env" {
   filename = "${path.module}/output/bas/vectr_env"
 }
 
-resource "local_file" "operator_service" {
-  content  = data.template_file.operator_service.rendered
-  filename = "${path.module}/output/bas/operator.service"
-}
-
-data "template_file" "operator_service" {
-  template = file("${path.module}/files/bas/operator.service.tpl")
-
-  vars = {
-    token            = random_uuid.token.result
-    operator_email   = var.operator_email 
-  }
-}
-
 data "template_file" "caldera_local_yml" {
   template = file("${path.module}/files/bas/local.yml.tpl")
 
@@ -369,12 +339,6 @@ data "template_file" "vectr_env" {
     vectr_hostname   = aws_instance.bas_server.public_dns 
     vectr_port       = var.vectr_port
   }
-}
-
-resource "aws_s3_object" "prelude_operator" {
-  bucket = aws_s3_bucket.staging.id
-  key    = var.prelude_filename
-  source = "${path.module}/files/bas/${var.prelude_filename}"
 }
 
 data "archive_file" "abilities" {

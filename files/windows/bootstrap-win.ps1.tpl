@@ -88,52 +88,5 @@ foreach ($filename in $scriptFilenames) {
   & $outfile
 }
 
-# ghosts client bootstrap processing for individual host
-$ghosts = "${install_ghosts}"
-lwrite("ghosts is $ghosts")
-if ($ghosts -ne "0") {
-  lwrite("Download and start ghosts client script for ${hostname}")
-  $filename = "ghosts-bootstrap-" + "${hostname}" + ".ps1"
-
-  lwrite("Processing script: $filename")
-  $object_url = "https://" + "${s3_bucket}" + ".s3." + "${region}" + ".amazonaws.com/" + "$filename"
-  lwrite("Downloading file: $object_url")
-  # Download each file from s3 bucket and run them
-  $outfile = "C:\terraform\" + "$filename"
-
-  $MaxAttempts = 5
-  $TimeoutSeconds = 30
-  $Attempt = 0
-
-
-  while ($Attempt -lt $MaxAttempts) {
-    $Attempt += 1
-    lwrite("Attempt: $Attempt")
-    try {
-        Invoke-WebRequest -Uri "$object_url" -OutFile $outfile -TimeoutSec $TimeoutSeconds
-        lwrite("Successful")
-        break
-    } catch {
-        if ($_.Exception.GetType().Name -eq "WebException" -and $_.Exception.Status -eq "Timeout") {
-            lwrite("Connection timed out. Retrying...")
-        } else {
-            lwrite("An unexpected error occurred:")
-            lwrite($_.Exception.Message)
-            break
-        }
-    }
-  }
-  if ($Attempt -eq $MaxAttempts) {
-    Write-Host "Reached maximum number of attempts. Continuing..."
-  }
-
-  # Run the script
-  lwrite("Running $outfile")
-  & $outfile
-
-} else {
-  lwrite("ghosts is not true")
-}
-
 </powershell>
 <persist>true</persist>

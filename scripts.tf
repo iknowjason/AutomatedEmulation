@@ -1,7 +1,6 @@
 ## Terraform for scripts to bootstrap
 locals {
   templatefiles = [
-    
     {
       name = "${path.module}/files/windows/red.ps1.tpl"
       variables = {
@@ -20,18 +19,16 @@ locals {
       }
     },
     {
-      name = "${path.module}/files/windows/prelude.ps1.tpl"
+      name = "${path.module}/files/windows/caldera.ps1.tpl"
       variables = {
         s3_bucket    = "${aws_s3_bucket.staging.id}"
         caldera_port = var.caldera_port
         region       = var.region
-        filename     = var.prelude_filename 
-        bas_server   = aws_instance.bas_server.private_ip 
+        bas_server   = aws_instance.bas_server.private_ip
       }
-},
-    
+    }
   ]
-
+    
   script_contents = [
     for t in local.templatefiles : templatefile(t.name, t.variables)
   ]
