@@ -132,9 +132,7 @@ api_key_red: redadmin2024
 
 Caldera API Cheat Sheet
 -----------------------
-Get Agents:
-curl -k https://ec2-18-224-151-55.us-east-2.compute.amazonaws.com:8443/api/v2/agents \
-  -H 'accept: application/json' -H "KEY:redadmin2024"
+<CUSTOM>
 --------------
 ```
 **Caldera on Windows Client:**
