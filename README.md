@@ -114,20 +114,28 @@ You can create custom abilities in your project that get automatically loaded in
 
 View the terraform outputs for important Caldera access information:
 ```
+-------
 Caldera Console
 -------
-http://3.15.204.148:9999
+https://ec2-18-224-151-55.us-east-2.compute.amazonaws.com:8443
 
 Caldera Console Credentials
 -------------------
-blue:Caldera2023
-red:Caldera2023
-admin:Caldera2023
+blue:Caldera2024
+red:Caldera2024
+admin:Caldera2024
 
 API Keys
 --------
-api_key_blue: blueadmin2023
-api_key_red: redamin2023
+api_key_blue: blueadmin2024
+api_key_red: redadmin2024
+
+Caldera API Cheat Sheet
+-----------------------
+Get Agents:
+curl -k https://ec2-18-224-151-55.us-east-2.compute.amazonaws.com:8443/api/v2/agents \
+  -H 'accept: application/json' -H "KEY:redadmin2024"
+--------------
 ```
 **Caldera on Windows Client:**
 
