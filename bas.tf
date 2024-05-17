@@ -246,7 +246,7 @@ admin:11_ThisIsTheFirstPassword_11
 -------
 Caldera Console
 -------
-https://${aws_instance.bas_server.public_dns}:${var.caldera_port_https}
+http://${aws_instance.bas_server.public_dns}:${var.caldera_port}
 
 Caldera Console Credentials
 -------------------
@@ -288,13 +288,13 @@ resource "aws_s3_object" "caldera_service_config" {
   content_type = "text/plain"
 }
 
-resource "aws_s3_object" "caldera_default_yml" {
+resource "aws_s3_object" "caldera_local_yml" {
   bucket = aws_s3_bucket.staging.id
-  key    = "default.yml"
-  source = local_file.caldera_default_yml.filename
+  key    = "local.yml"
+  source = local_file.caldera_local_yml.filename
   content_type = "text/plain"
 
-  depends_on = [local_file.caldera_default_yml]
+  depends_on = [local_file.caldera_local_yml]
 }
 
 resource "aws_s3_object" "vectr_env" {
@@ -306,7 +306,7 @@ resource "aws_s3_object" "vectr_env" {
   depends_on = [local_file.vectr_env]
 }
 
-resource "local_file" "caldera_default_yml" {
+resource "local_file" "caldera_local_yml" {
   content  = data.template_file.caldera_local_yml.rendered
   filename = "${path.module}/output/bas/local.yml"
 }

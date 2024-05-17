@@ -1,7 +1,7 @@
 #!/bin/bash
 
 set -e
-
+CALDERA_SSL_PORT=8443
 exec > >(sudo tee /var/log/user-data.log|logger -t user-data -s 2>/dev/console) 2>&1
 
 echo "Start bootstrap script"
@@ -33,9 +33,6 @@ sudo pip3 install --upgrade pyOpenSSL
 
 # Install NodeJS for Caldera 5.0 requirement
 cd ~
-#curl -sL https://deb.nodesource.com/setup_16.x -o nodesource_setup.sh
-#sudo bash nodesource_setup.sh
-#curl -sL https://deb.nodesource.com/setup_18.x -o nodesource_setup.sh
 curl -fsSL https://deb.nodesource.com/setup_21.x | sudo -E bash - &&\
 sudo apt-get install -y nodejs
 
@@ -70,9 +67,9 @@ do
     fi
 done
 
-# Get default.yml 
-echo "Get default.yml"
-file="default.yml"
+# Get local.yml 
+echo "Get local.yml"
+file="local.yml"
 object_url="https://${s3_bucket}.s3.${region}.amazonaws.com/$file"
 echo "Downloading s3 object url: $object_url"
 for i in {1..5}
@@ -94,10 +91,13 @@ cp /opt/caldera/caldera.service /etc/systemd/system/caldera.service
 sudo cp /opt/caldera/local.yml /opt/caldera/conf/local.yml
 
 #Caldera SSL setup
+echo "Modifying caldera configuration files"
 sudo cp plugins/ssl/templates/haproxy.conf conf/haproxy.conf
 sed -i 's/insecure_certificate.pem/certificate.pem/' conf/haproxy.conf
-sed -i 's|http://0.0.0.0:8888|https://$INSTANCE_PUBLIC_DNS:8443|' conf/default.yml
-echo "VITE_CALDERA_URL=https://$INSTANCE_PUBLIC_DNS:8443" > plugins/magma/.env
+sed -i "s|http://0.0.0.0:8888|https://$INSTANCE_PUBLIC_DNS:8443|" conf/local.yml
+sed -i "s|host: 0.0.0.0|host: $INSTANCE_PUBLIC_DNS|" conf/local.yml
+#echo "VITE_CALDERA_URL=https://$INSTANCE_PUBLIC_DNS:8443" > plugins/magma/.env
+#sed -i "s|VITE_CALDERA_URL=http://{host}:{port}|VITE_CALDERA_URL=https://$INSTANCE_PUBLIC_DNS:8443|" /opt/caldera/server.py
 
 # Download abilities zip
 echo "Get abilities.zip"
