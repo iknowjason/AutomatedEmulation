@@ -307,19 +307,35 @@ resource "aws_s3_object" "vectr_env" {
 }
 
 resource "local_file" "caldera_local_yml" {
-  content  = data.template_file.caldera_local_yml.rendered
+  # content  = data.template_file.caldera_local_yml.rendered
+  content  = local.caldera_local_yml
   filename = "${path.module}/output/bas/local.yml"
 }
 
 resource "local_file" "vectr_env" {
-  content  = data.template_file.vectr_env.rendered
+  # content  = data.template_file.vectr_env.rendered
+  content  = local.vectr_env
   filename = "${path.module}/output/bas/vectr_env"
 }
 
-data "template_file" "caldera_local_yml" {
-  template = file("${path.module}/files/bas/local.yml.tpl")
+# data "template_file" "caldera_local_yml" {
+#   template = file("${path.module}/files/bas/local.yml.tpl")
 
-  vars = {
+#   vars = {
+#     api_key_blue            = var.api_key_blue 
+#     api_key_red             = var.api_key_red
+#     blue_username           = var.blue_username
+#     blue_password           = var.blue_password
+#     caldera_admin_username  = var.caldera_admin_username
+#     caldera_admin_password  = var.caldera_admin_password
+#     red_username            = var.red_username
+#     red_password            = var.red_password
+#     caldera_port            = var.caldera_port
+#   }
+# }
+
+locals {
+  caldera_local_yml = templatefile("${path.module}/files/bas/local.yml.tpl", {
     api_key_blue            = var.api_key_blue 
     api_key_red             = var.api_key_red
     blue_username           = var.blue_username
@@ -329,16 +345,23 @@ data "template_file" "caldera_local_yml" {
     red_username            = var.red_username
     red_password            = var.red_password
     caldera_port            = var.caldera_port
-  }
+  })
 }
 
-data "template_file" "vectr_env" {
-  template = file("${path.module}/files/bas/vectr_env.tpl")
+# data "template_file" "vectr_env" {
+#   template = file("${path.module}/files/bas/vectr_env.tpl")
 
-  vars = {
+#   vars = {
+#     vectr_hostname   = aws_instance.bas_server.public_dns 
+#     vectr_port       = var.vectr_port
+#   }
+# }
+
+locals {
+  vectr_env = templatefile("${path.module}/files/bas/vectr_env.tpl", {
     vectr_hostname   = aws_instance.bas_server.public_dns 
     vectr_port       = var.vectr_port
-  }
+  })
 }
 
 data "archive_file" "abilities" {
