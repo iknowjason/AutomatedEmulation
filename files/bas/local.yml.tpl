@@ -6,6 +6,7 @@ app.contact.dns.socket: 0.0.0.0:8853
 app.contact.gist: API_KEY
 app.contact.html: /weather
 app.contact.http: http://0.0.0.0:${caldera_port}
+app.frontend.api_base_url: ${caldera_transport}://${caldera_host}:${caldera_port}
 app.contact.slack.api_key: SLACK_TOKEN
 app.contact.slack.bot_id: SLACK_BOT_ID
 app.contact.slack.channel_id: SLACK_CHANNEL_ID
