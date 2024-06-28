@@ -37,7 +37,8 @@ resource "aws_instance" "win1" {
   key_name	= module.key_pair.key_pair_name
   subnet_id     = aws_subnet.user_subnet.id
   associate_public_ip_address = true
-  user_data	= data.template_file.ps_template_win1.rendered
+  # user_data	= data.template_file.ps_template_win1.rendered
+  user_data	= local.ps_template_win1
   vpc_security_group_ids = [
     aws_security_group.operator_windows.id
   ]
@@ -54,10 +55,39 @@ resource "aws_instance" "win1" {
   ]
 }
 
-data "template_file" "ps_template_win1" {
-  template = file("${path.module}/files/windows/bootstrap-win.ps1.tpl")
+# data "template_file" "ps_template_win1" {
+#   template = file("${path.module}/files/windows/bootstrap-win.ps1.tpl")
 
-  vars  = {
+#   vars  = {
+#     hostname                  = "win1"
+#     join_domain               = var.join-domain-win1 ? 1 : 0
+#     install_sysmon            = true ? 1 : 0
+#     install_red               = true ? 1 : 0
+#     install_ghosts            = false ? 1 : 0
+#     install_prelude           = true ? 1 : 0
+#     auto_logon_domain_user    = false ? 1 : 0
+#     dc_ip                     = "" 
+#     endpoint_ad_user          = "" 
+#     endpoint_ad_password      = "" 
+#     winrm_username            = "" 
+#     winrm_password            = "" 
+#     admin_username            = var.admin-username-win1
+#     admin_password            = var.admin-password-win1
+#     ad_domain                 = "rtc.local"
+#     script_files              = join(",", local.script_files)
+#     windows_msi               = "" 
+#     vclient_config            = "" 
+#     winlogbeat_zip            = "" 
+#     winlogbeat_config         = "" 
+#     sysmon_config             = local.sysmon_config 
+#     sysmon_zip                = local.sysmon_zip 
+#     s3_bucket                 = "${aws_s3_bucket.staging.id}"
+#     region                    = var.region
+#   }
+# }
+
+locals {
+  ps_template_win1 = templatefile("${path.module}/files/windows/bootstrap-win.ps1.tpl", {
     hostname                  = "win1"
     join_domain               = var.join-domain-win1 ? 1 : 0
     install_sysmon            = true ? 1 : 0
@@ -82,12 +112,13 @@ data "template_file" "ps_template_win1" {
     sysmon_zip                = local.sysmon_zip 
     s3_bucket                 = "${aws_s3_bucket.staging.id}"
     region                    = var.region
-  }
+  })
 }
 
 resource "local_file" "debug-bootstrap-script-win1" {
   # For inspecting the rendered powershell script as it is loaded onto endpoint 
-  content = data.template_file.ps_template_win1.rendered
+  # content = data.template_file.ps_template_win1.rendered
+  content = local.ps_template_win1
   filename = "${path.module}/output/windows/bootstrap-${var.endpoint_hostname-win1}.ps1"
 }
 
