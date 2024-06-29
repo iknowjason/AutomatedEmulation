@@ -43,7 +43,7 @@ plugins:
 - stockpile
 - training
 - ssl
-port: ${caldera_port} 
+port: ${caldera_listen} 
 reports_dir: /tmp
 auth.login.handler.module: default
 requirements:

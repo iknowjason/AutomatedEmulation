@@ -94,10 +94,8 @@ sudo cp /opt/caldera/local.yml /opt/caldera/conf/local.yml
 echo "Modifying caldera configuration files"
 sudo cp plugins/ssl/templates/haproxy.conf conf/haproxy.conf
 sed -i 's/insecure_certificate.pem/certificate.pem/' conf/haproxy.conf
-sed -i "s|http://0.0.0.0:8888|https://$INSTANCE_PUBLIC_DNS:8443|" conf/local.yml
-sed -i "s|host: 0.0.0.0|host: $INSTANCE_PUBLIC_DNS|" conf/local.yml
-#echo "VITE_CALDERA_URL=https://$INSTANCE_PUBLIC_DNS:8443" > plugins/magma/.env
-#sed -i "s|VITE_CALDERA_URL=http://{host}:{port}|VITE_CALDERA_URL=https://$INSTANCE_PUBLIC_DNS:8443|" /opt/caldera/server.py
+#sed -i "s|http://0.0.0.0:8888|https://$INSTANCE_PUBLIC_DNS:8443|" conf/local.yml
+#sed -i "s|host: 0.0.0.0|host: $INSTANCE_PUBLIC_DNS|" conf/local.yml
 
 # Download abilities zip
 echo "Get abilities.zip"

@@ -8,7 +8,7 @@ variable "vectr_port" {
 
 variable "caldera_transport_protocol" {
   description = "Either http or https should be used"
-  default     = "http"
+  default     = "https"
 }
 
 variable "caldera_port" {
@@ -251,7 +251,7 @@ admin:11_ThisIsTheFirstPassword_11
 -------
 Caldera Console
 -------
-http://${aws_instance.bas_server.public_dns}:${var.caldera_port}
+${var.caldera_transport_protocol}://${aws_instance.bas_server.public_dns}:${var.caldera_port_https}
 
 Caldera Console Credentials
 -------------------
@@ -331,7 +331,8 @@ locals {
     caldera_admin_password  = var.caldera_admin_password
     red_username            = var.red_username
     red_password            = var.red_password
-    caldera_port            = var.caldera_port
+    caldera_port            = var.caldera_port_https
+    caldera_listen          = var.caldera_port
     caldera_host            = aws_instance.bas_server.public_dns
     caldera_transport       = var.caldera_transport_protocol
   })
