@@ -33,7 +33,9 @@ sudo pip3 install --upgrade pyOpenSSL
 
 # Install NodeJS for Caldera 5.0 requirement
 cd ~
-curl -fsSL https://deb.nodesource.com/setup_21.x | sudo -E bash - &&\
+# Fix issue with ViteJS blocking NodeJS v21
+curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash - &&\
+#curl -fsSL https://deb.nodesource.com/setup_21.x | sudo -E bash - &&\
 sudo apt-get install -y nodejs
 
 # Downloading Caldera
