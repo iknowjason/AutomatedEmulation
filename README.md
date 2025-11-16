@@ -119,6 +119,10 @@ Verify the mlflow server is listening on port 5000
 sudo netstat -tulpn | grep 5000
 ```
 
+**MLflow server publicly exposed:**
+The MCP server plugin automatically exposes an MLflow server.  MLflow provides log tracing, debugging, and monitoring of the LLM inference calls used by the Caldera MCP plugin, which is a wrapper to the Caldera API.  One important note.  By default this server only listens on localhost, but I've adapted it to allow remote connections.  Be careful and make sure you have proper EC2 security groups to only allow authorized servouces to connect to the MLflow server.
+![Caldera MLflow](images/mlflow-overview.png "Caldera MLflow Server")
+
 **Customize Caldera Linux:**
 
 To customize Caldera, you can modify the default admin credentials for red, blue and api keys in ```bas.tf```.  For other customizations, you can modify the ```local.yml.tpl``` Caldera configuration file.
