@@ -9,14 +9,15 @@ Added the Caldera MCP server plugin, Bountyhunter plugin.  Added automated downl
 
 Automated Emulation is a simple terraform template creating a customizable and automated Breach and Attack Simulation lab.  It automically builds the following resources hosted in AWS:
 
-* One Linux server deploying Caldera and VECTR (vectr.io)
-* Linux Server:  The latest Caldera 5.0 with Magma VueJS web application
-* One Windows Client (Windows Server 2022) auto-configured for Caldera agent deployment, and other Red & Blue tools
-* Windows Client:  Atomic Red Team (ART) automated deployment
-* Windows Client:  Sysmon automated deployment
+* One Linux server deploying Caldera and VECTR (vectr.io).
+* Linux Server:  The latest Caldera 5.3 with Magma VueJS web application.
+* One Windows Client (Windows Server 2022) auto-configured for Caldera agent deployment, and other Red & Blue tools.
+* Windows Client:  Atomic Red Team (ART) automated deployment.
+* Windows Client:  Sysmon automated deployment.
 * Caldera MCP server plugin installed.
+* Exposes an MLflow server for observability, tracing, and debug of Caldera LLM inference calls.
 * Caldera Bountyhunter plugin installed.
-* Caldera EMU plugin:  Auto-downloads payloads.  This CALDERA Plugin converts Adversary Emulation Plans from the Center for Threat Informed Defense 
+* Caldera EMU plugin:  Auto-downloads payloads.  This CALDERA Plugin converts Adversary Emulation Plans from the Center for Threat Informed Defense.
 
 See the **Features and Capabilities** section for more details.
 
