@@ -1,5 +1,8 @@
 # Automated Emulation with Caldera 5.3 Support!
 
+## Update for 11/16/25: Caldera MCP Server plugin!
+Added the Caldera MCP server plugin, Bountyhunter plugin.  Added automated download of emu plugin payloads.
+
 ## Overview
 
 Automated Emulation is a simple terraform template creating a customizable and automated Breach and Attack Simulation lab.  It automically builds the following resources hosted in AWS:
