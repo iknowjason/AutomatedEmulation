@@ -3,7 +3,7 @@
 ![Caldera MCP](images/mcp-overview.png "Caldera MCP Server")
 
 ## Update for 11/16/25: Caldera MCP Server plugin!
-Added the Caldera MCP server plugin, Bountyhunter plugin.  Added automated download of emu plugin payloads.  Caldera now has the capability to use the MCP server as a wrapper to the Caldera API, helping give context to LLMs for building new abilities, operation planners, and a CTI with RAG integration.
+Added the Caldera MCP server plugin, Bountyhunter plugin.  Added automated download of emu plugin payloads.  Caldera now has the capability to use the MCP server as a wrapper to the Caldera API, helping give context to LLMs for building new abilities, operation planners, and a CTI with RAG integration.  See this [MITRE blog](https://medium.com/@mitrecaldera/connecting-llms-to-caldera-with-the-mcp-plugin-da1450254827) for more information.  
 
 ## Overview
 
