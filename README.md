@@ -12,6 +12,9 @@ Automated Emulation is a simple terraform template creating a customizable and a
 * One Windows Client (Windows Server 2022) auto-configured for Caldera agent deployment, and other Red & Blue tools
 * Windows Client:  Atomic Red Team (ART) automated deployment
 * Windows Client:  Sysmon automated deployment
+* Caldera MCP server plugin installed.
+* Caldera Bountyhunter plugin installed.
+* Caldera EMU plugin:  Auto-downloads payloads.  This CALDERA Plugin converts Adversary Emulation Plans from the Center for Threat Informed Defense 
 
 See the **Features and Capabilities** section for more details.
 
