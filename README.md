@@ -1,4 +1,4 @@
-# Automated Emulation with Caldera MCP Server and 5.3!
+# Automated Emulation with Caldera MCP Server!
 
 ![Caldera MCP](images/mcp-overview.png "Caldera MCP Server")
 
