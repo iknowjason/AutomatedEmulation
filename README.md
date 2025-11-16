@@ -106,8 +106,20 @@ Once in the system, tail the user-data logfile.  You will see the steps from the
 ```
 tail -f /var/log/user-data.log
 ```
+After the system shows that the bootstrap is complete, monitor the Caldera service:
+```
+sudo systemctl status caldera
+```
+After it is running, verify the listening ports for Caldera web admin TLS + API:
+```
+sudo netstat -tulpn | grep 8443
+```
+Verify the mlflow server is listening on port 5000
+```
+sudo netstat -tulpn | grep 5000
+```
 
-**Customiz Caldera Linux:**
+**Customize Caldera Linux:**
 
 To customize Caldera, you can modify the default admin credentials for red, blue and api keys in ```bas.tf```.  For other customizations, you can modify the ```local.yml.tpl``` Caldera configuration file.
 
