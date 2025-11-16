@@ -5,6 +5,12 @@
 *.tfstate
 *.tfstate.*
 
+# terraform dynamic output
+output/*
+
+# ssh key
+ssh_key.pem
+
 # Crash log files
 crash.log
 crash.*.log
@@ -38,3 +44,5 @@ terraform.rc
 .env.*.sh
 
 .
+
+.terraform.lock.hcl

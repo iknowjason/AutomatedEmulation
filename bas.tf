@@ -89,6 +89,14 @@ resource "aws_security_group" "bas_ingress" {
     cidr_blocks     = [local.src_ip]
   }
 
+  # Port 5000 Caldera mlflow server
+  ingress {
+    from_port       = 5000
+    to_port         = 5000
+    protocol        = "tcp"
+    cidr_blocks     = [local.src_ip]
+  }
+
   # Server port Caldera http console
   ingress {
     from_port       = var.caldera_port 
@@ -252,6 +260,10 @@ admin:11_ThisIsTheFirstPassword_11
 Caldera Console
 -------
 ${var.caldera_transport_protocol}://${aws_instance.bas_server.public_dns}:${var.caldera_port_https}
+
+Caldera MCP MLflow server
+-------
+http://${aws_instance.bas_server.public_dns}:5000
 
 Caldera Console Credentials
 -------------------

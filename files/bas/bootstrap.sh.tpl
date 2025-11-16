@@ -28,14 +28,14 @@ sudo apt install upx -y
 sudo apt install python3.9 -y
 sudo apt install python3-pip -y
 sudo apt-get install haproxy -y
+sudo apt-get install zlib1g -y
 # Upgrade pyOpenSSL - weird issue only impacting AWS EC2 AMI images
 sudo pip3 install --upgrade pyOpenSSL
 
 # Install NodeJS for Caldera 5.0 requirement
 cd ~
-# Fix issue with ViteJS blocking NodeJS v21
-curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash - &&\
 #curl -fsSL https://deb.nodesource.com/setup_21.x | sudo -E bash - &&\
+curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash - &&\
 sudo apt-get install -y nodejs
 
 # Downloading Caldera
@@ -91,6 +91,56 @@ cd /opt/caldera
 sudo pip3 install -r requirements.txt
 cp /opt/caldera/caldera.service /etc/systemd/system/caldera.service
 sudo cp /opt/caldera/local.yml /opt/caldera/conf/local.yml
+
+# Install mcp server plugin
+echo "Install mcp server plugin"
+pip3 install psutil
+pip3 install pyminizip
+cd /opt/caldera
+git clone https://github.com/mitre/MCP.git plugins/mcp
+python3 -m pip install -r plugins/mcp/requirements.txt 
+# In the mcp hook.py, make changes to the MLflow server to allow remote connections
+HOOK_FILE="/opt/caldera/plugins/mcp/hook.py"
+# Replace localhost and 127.0.0.1 with 0.0.0.0
+sed -i "s/127\.0\.0\.1/0.0.0.0/g" "$HOOK_FILE"
+sed -i "s/localhost/0.0.0.0/g" "$HOOK_FILE"
+
+###
+# Insert --allowed-hosts of * into MLflow args in hook.py
+###
+# Build allowed-hosts entry:
+ALLOWED_HOSTS="\"--allowed-hosts\", \"$PUBLIC_DNS:5000,localhost:*,127.0.0.1:*\","
+
+# Insert AFTER the --host 0.0.0.0 line
+sed -i "/--host\", \"0.0.0.0\"/a\        $ALLOWED_HOSTS" "$HOOK_FILE"
+
+###
+# emu plugin - needed to run the download_payloads.sh script
+###
+CALDERA_ROOT=/opt/caldera
+EMU_PLUGIN_DIR="$CALDERA_ROOT/plugins/emu"
+
+# Install bountyhunter plugin
+echo "Install bountyhunter plugin"
+BH_PLUGIN_DIR="$CALDERA_ROOT/plugins/bountyhunter"
+BH_GIT_REPO="https://github.com/fkie-cad/bountyhunter.git"
+if [ ! -d "$BH_PLUGIN_DIR" ]; then
+  echo "[INFO] cloning bountyhunter repo"
+  git clone "$BH_GIT_REPO" "$BH_PLUGIN_DIR"
+else
+  echo "[INFO] bountyhunter repo already exists"
+fi
+
+echo "Installing bountyhunter plugin"
+python3 -m pip install -r "$BH_PLUGIN_DIR/requirements.txt"
+
+echo "Unzip bountyhunter payloads"
+if [ -f "$BH_PLUGIN_DIR/payloads/payloads.zip" ]; then
+  echo "[INFO] unzipping bountyhunter payloads"
+  unzip -o "$BH_PLUGIN_DIR/payloads/payloads.zip" -d "$BH_PLUGIN_DIR/payloads"
+else
+  echo "[INFO] Unable to unzip bountyhunter payloads"
+fi
 
 #Caldera SSL setup
 echo "Modifying caldera configuration files"
@@ -163,7 +213,6 @@ cd /opt/vectr
 wget https://github.com/SecurityRiskAdvisors/VECTR/releases/download/ce-8.8.1/sra-vectr-runtime-8.8.1-ce.zip 
 unzip sra-vectr-runtime-8.8.1-ce.zip
 # Get the .env with correct variables
-# Get default.yml
 echo "Get vector .env"
 file="vectr_env"
 object_url="https://${s3_bucket}.s3.${region}.amazonaws.com/$file"
@@ -184,6 +233,20 @@ done
 cp /opt/vectr/vectr_env /opt/vectr/.env
 # Start docker containers
 echo "Start vectr containers"
-sudo docker compose up -d 
+sudo docker compose up -d
+
+###
+# Stop Caldera to run emu payload download script
+# Caldera has already allowed emu to auto-download the library upon initial caldera service start
+###
+echo "Stop Caldera so it can download the emu payloads via script"
+systemctl stop caldera
+cd "$EMU_PLUGIN_DIR"
+echo "Run download_payloads.sh"
+./download_payloads.sh 
+
+# Rebuild UI and start Caldera for final time
+echo "Start Caldera for final time"
+systemctl start caldera
 
 echo "End of bootstrap script"

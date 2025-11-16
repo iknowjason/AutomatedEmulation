@@ -34,15 +34,21 @@ host: 0.0.0.0
 plugins:
 - access
 - atomic
+- builder 
 - compass
 - debrief
 - fieldmanual
+- gameboard 
+- human 
 - manx
 - response
 - sandcat
 - stockpile
 - training
 - ssl
+- mcp
+- emu 
+- bountyhunter 
 port: ${caldera_listen} 
 reports_dir: /tmp
 auth.login.handler.module: default
