@@ -1,4 +1,6 @@
-# Automated Emulation with Caldera 5.3 Support!
+# Automated Emulation with Caldera 5.3 Support and MCP Server!
+
+![Caldera MCP](images/mcp-overview.png "Caldera MCP Server")
 
 ## Update for 11/16/25: Caldera MCP Server plugin!
 Added the Caldera MCP server plugin, Bountyhunter plugin.  Added automated download of emu plugin payloads.
