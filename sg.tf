@@ -1,4 +1,4 @@
-# Thanks to @christophetd and his Github.com/Adaz project for this little code
+# Thanks to @christophetd and his https://github.com/christophetd/adaz for this little code
 data "http" "firewall_allowed" {
   url = "http://ifconfig.so"
 }
