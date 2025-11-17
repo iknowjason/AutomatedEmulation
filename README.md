@@ -141,6 +141,10 @@ Caldera Console
 -------
 https://ec2-18-224-151-55.us-east-2.compute.amazonaws.com:8443
 
+Caldera MCP MLflow server
+-------
+http://ec2-18-224-151-55.us-east-2.compute.amazonaws.com:5000
+
 Caldera Console Credentials
 -------------------
 blue:Caldera2024
