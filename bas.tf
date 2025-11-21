@@ -240,6 +240,7 @@ resource "aws_instance" "bas_server" {
   user_data = templatefile("files/bas/bootstrap.sh.tpl", {
     s3_bucket                 = "${aws_s3_bucket.staging.id}" 
     region                    = var.region
+    api_key                   = var.api_key_red
   })
 
 }

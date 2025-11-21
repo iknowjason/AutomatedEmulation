@@ -115,6 +115,10 @@ ALLOWED_HOSTS="\"--allowed-hosts\", \"$PUBLIC_DNS:5000,localhost:*,127.0.0.1:*\"
 # Insert AFTER the --host 0.0.0.0 line
 sed -i "/--host\", \"0.0.0.0\"/a\        $ALLOWED_HOSTS" "$HOOK_FILE"
 
+# Update the default api_key used by the mcp_plugin, making it what we need from API_KEY we pass in
+MCP_FILE=/opt/caldera/plugins/mcp/app/mcp_server.py
+sed -i "s/api_key=\"ADMIN123\",/api_key=\"${api_key}\",/" "$MCP_FILE"
+
 ###
 # emu plugin - needed to run the download_payloads.sh script
 ###
