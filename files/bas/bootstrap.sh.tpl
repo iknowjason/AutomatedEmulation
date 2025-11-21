@@ -29,6 +29,7 @@ sudo apt install python3.9 -y
 sudo apt install python3-pip -y
 sudo apt-get install haproxy -y
 sudo apt-get install zlib1g -y
+sudo apt-get install -y python-is-python3
 # Upgrade pyOpenSSL - weird issue only impacting AWS EC2 AMI images
 sudo pip3 install --upgrade pyOpenSSL
 
