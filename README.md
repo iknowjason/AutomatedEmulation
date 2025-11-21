@@ -1,20 +1,25 @@
-# Automated Emulation with Caldera 5.0 Support!
+# Automated Emulation with Caldera MCP Server!
+
+![Caldera MCP](images/mcp-overview.png "Caldera MCP Server")
+
+## Update for 11/16/25: Caldera MCP Server plugin!
+Added the Caldera MCP server plugin, Bountyhunter plugin.  Added automated download of emu plugin payloads.  Caldera now has the capability to use the MCP server as a wrapper to the Caldera API, helping give context to LLMs for building new abilities, operation planners, and a CTI with RAG integration.  See this [MITRE blog](https://medium.com/@mitrecaldera/connecting-llms-to-caldera-with-the-mcp-plugin-da1450254827) for more information.  
 
 ## Overview
 
 Automated Emulation is a simple terraform template creating a customizable and automated Breach and Attack Simulation lab.  It automically builds the following resources hosted in AWS:
 
-* One Linux server deploying Caldera and VECTR (vectr.io)
-* Linux Server:  The latest Caldera 5.0 with Magma VueJS web application
-* One Windows Client (Windows Server 2022) auto-configured for Caldera agent deployment, and other Red & Blue tools
-* Windows Client:  Atomic Red Team (ART) automated deployment
-* Windows Client:  Sysmon automated deployment
+* One Linux server deploying Caldera and VECTR (vectr.io).
+* Linux Server:  The latest Caldera 5.3 with Magma VueJS web application.
+* One Windows Client (Windows Server 2022) auto-configured for Caldera agent deployment, and other Red & Blue tools.
+* Windows Client:  Atomic Red Team (ART) automated deployment.
+* Windows Client:  Sysmon automated deployment.
+* Caldera MCP server plugin installed.
+* Exposes an MLflow server for observability, tracing, and debug of Caldera LLM inference calls.
+* Caldera Bountyhunter plugin installed.
+* Caldera EMU plugin:  Auto-downloads payloads.  This CALDERA Plugin converts Adversary Emulation Plans from the Center for Threat Informed Defense.
 
 See the **Features and Capabilities** section for more details.
-
-## Key Differences
-
-This lab differs from other popular ```Cyber Ranges``` in its design and philosophy.  No secondary tools like Ansible are necessary.  Feel free to use them if you like.  But they aren't required for configuration management.  Instead of using 3rd party configuration management tools, this lab uses terraform providers (AWS SDK) and builtin AWS features (```user data```).  You don't have to rely on a secondary agent or deal with outdated libraries or networking issues with agentless push or updating a secondary tool that causes issues over time.  This increases ```stability, consistency, and speed``` for building and configuring cloud resources.  Use terraform, bash, and powershell to build and configure.  A small user-data script is pushed into the system and runs.  Individual configuration management scripts are uploaded to an S3 bucket.  The master script instructs the system which smaller scripts to run which builds the system.  With good documentation, the location of these scripts should make it easy to add and customize.  See the **Features and Capabilities** section for more details.     
 
 ## Requirements and Setup
 
@@ -101,8 +106,25 @@ Once in the system, tail the user-data logfile.  You will see the steps from the
 ```
 tail -f /var/log/user-data.log
 ```
+After the system shows that the bootstrap is complete, monitor the Caldera service:
+```
+sudo systemctl status caldera
+```
+After it is running, verify the listening ports for Caldera web admin TLS + API:
+```
+sudo netstat -tulpn | grep 8443
+```
+Verify the mlflow server is listening on port 5000
+```
+sudo netstat -tulpn | grep 5000
+```
 
-**Customiz Caldera Linux:**
+**MLflow server publicly exposed:**
+The MCP server plugin automatically exposes an MLflow server.  MLflow provides log tracing, debugging, and monitoring of the LLM inference calls used by the Caldera MCP plugin, which is a wrapper to the Caldera API.  One important note.  By default this server only listens on localhost, but I've adapted it to allow remote connections.  Be careful and make sure you have proper EC2 security groups to only allow authorized sources to connect to the MLflow server.
+
+![Caldera MLflow](images/mlflow-overview.png "Caldera MLflow Server")
+
+**Customize Caldera Linux:**
 
 To customize Caldera, you can modify the default admin credentials for red, blue and api keys in ```bas.tf```.  For other customizations, you can modify the ```local.yml.tpl``` Caldera configuration file.
 
@@ -118,6 +140,10 @@ View the terraform outputs for important Caldera access information:
 Caldera Console
 -------
 https://ec2-18-224-151-55.us-east-2.compute.amazonaws.com:8443
+
+Caldera MCP MLflow server
+-------
+http://ec2-18-224-151-55.us-east-2.compute.amazonaws.com:5000
 
 Caldera Console Credentials
 -------------------
@@ -231,6 +257,10 @@ Then tail the user-data logfile to monitor any potential issues with the bootstr
 ```
 tail -f /var/log/user-data.log
 ```
+
+## Key Differences
+
+This lab differs from other popular ```Cyber Ranges``` in its design and philosophy.  No secondary tools like Ansible are necessary.  Feel free to use them if you like.  But they aren't required for configuration management.  Instead of using 3rd party configuration management tools, this lab uses terraform providers (AWS SDK) and builtin AWS features (```user data```).  You don't have to rely on a secondary agent or deal with outdated libraries or networking issues with agentless push or updating a secondary tool that causes issues over time.  This increases ```stability, consistency, and speed``` for building and configuring cloud resources.  Use terraform, bash, and powershell to build and configure.  A small user-data script is pushed into the system and runs.  Individual configuration management scripts are uploaded to an S3 bucket.  The master script instructs the system which smaller scripts to run which builds the system.  With good documentation, the location of these scripts should make it easy to add and customize.  See the **Features and Capabilities** section for more details.  
 
 ### Future
 
