@@ -2,5 +2,4 @@ adversary_id: 02be6078-b2b1-47d9-9940-e4784eb6ba48
 name: Sample Test Adversary 
 description: Testing automation for Caldera 
 atomic_ordering:
-- eb595aa9-0305-4fbc-906b-358e7a8c7c56
-- 13ef8dcd-9c3f-4c27-860d-73414abebf76
+- c0da588f-79f0-4263-8998-7496b1a40596 
