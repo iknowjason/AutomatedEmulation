@@ -370,6 +370,12 @@ data "archive_file" "payloads" {
     output_path = "${path.module}/output/bas/payloads.zip"
 }
 
+data "archive_file" "adversaries" {
+    type        = "zip"
+    source_dir  = "${path.module}/files/bas/adversaries"
+    output_path = "${path.module}/output/bas/adversaries.zip"
+}
+
 resource "aws_s3_object" "abilities_zip" {
     depends_on = [data.archive_file.abilities]
     
@@ -384,4 +390,12 @@ resource "aws_s3_object" "payloads_zip" {
     bucket = aws_s3_bucket.staging.id
     key    = "payloads.zip"
     source = "${data.archive_file.payloads.output_path}"
+}
+
+resource "aws_s3_object" "adversaries_zip" {
+    depends_on = [data.archive_file.adversaries]
+
+    bucket = aws_s3_bucket.staging.id
+    key    = "adversaries.zip"
+    source = "${data.archive_file.adversaries.output_path}"
 }

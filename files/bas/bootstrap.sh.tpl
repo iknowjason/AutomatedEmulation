@@ -174,6 +174,26 @@ done
 # unzip abilities
 sudo unzip /opt/caldera/abilities.zip -d /opt/caldera/data/abilities/
 
+# Download adversaries zip
+echo "Get adversaries.zip"
+file="adversaries.zip"
+object_url="https://${s3_bucket}.s3.${region}.amazonaws.com/$file"
+echo "Downloading s3 object url: $object_url"
+for i in {1..5}
+do
+    echo "Download attempt: $i"
+    curl "$object_url" -o /opt/caldera/adversaries.zip
+
+    if [ $? -eq 0 ]; then
+        echo "Download successful."
+        break
+    else
+        echo "Download failed. Retrying"
+    fi
+done
+# unzip adversaries
+sudo unzip /opt/caldera/adversaries.zip -d /opt/caldera/data/adversaries/
+
 # Download payloads zip
 echo "Get payloads.zip"
 file="payloads.zip"
